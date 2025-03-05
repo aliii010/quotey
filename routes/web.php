@@ -2,16 +2,18 @@
 
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\QuoteController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
 
 Route::get('/', function (Request $request) {
     if ($request->user() && $request->user()->hasRole('admin')) {
         return redirect()->route('users.index');
     }
 
-    return redirect()->route('welcome');
+    return view('welcome');
 });
 
 Route::get('/dashboard', function () {
@@ -41,5 +43,8 @@ Route::middleware('auth')->group(function () {
         Route::put('/users/{userId}/roles', [UserController::class, 'updateRoles'])->name('users.updateRoles');
     });
 });
+
+
+Route::resource('/quote', QuoteController::class);
 
 require __DIR__.'/auth.php';
