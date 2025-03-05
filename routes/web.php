@@ -3,6 +3,7 @@
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\QuoteController;
+use App\Http\Controllers\RFQController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -45,6 +46,7 @@ Route::middleware('auth')->group(function () {
 });
 
 
-Route::resource('/quote', QuoteController::class);
+Route::get('/rfq/step1', [RFQController::class, 'showStep1'])->name('rfq.step1');
+Route::post('/rfq/step1', [RFQController::class, 'processStep1'])->name('rfq.step1.process');
 
 require __DIR__.'/auth.php';
