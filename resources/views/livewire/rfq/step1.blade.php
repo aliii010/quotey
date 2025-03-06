@@ -1,4 +1,4 @@
-<div  class="flex justify-center items-center h-screen">
+<div  class="flex flex-col justify-center items-center h-screen">
     <form wire:submit.prevent="submit">
         <h2 class="text-2xl font-semibold mb-4 text-center">Create RFQ - Step 1</h2>
 
@@ -32,7 +32,6 @@
                                 wire:model="products.{{ $index }}.quantity"
                                 class="block w-full"
                                 required
-                                min="1"
                             />
                         </div>
 
@@ -69,7 +68,7 @@
             @endforeach
         </div>
 
-        <div class="flex items-center justify-between mt-4">
+        <div class="flex items-center justify-end mt-4 gap-4">
             <x-primary-button type="button" wire:click="addProduct">
                 {{ __('Add More Products') }}
             </x-primary-button>

@@ -12,7 +12,7 @@ class Step1 extends Component
 
     protected $rules = [
         'products.*.product_id' => 'required|exists:products,id',
-        'products.*.unit' => 'required|string',
+        'products.*.unit' => 'required|string', // TODO : wxdxh for GRP and m³ for ENM
         'products.*.quantity' => 'required|integer|min:5',
         'products.*.insulation' => 'required|in:Insulated,Non-insulated',
         'products.*.stand' => 'required|in:Yes,No',
@@ -21,15 +21,20 @@ class Step1 extends Component
     public function mount()
     {
         $this->allProducts = Product::all();
-        $this->products = [
-            [
-                'product_id' => '',
-                'unit' => '',
-                'quantity' => '',
-                'insulation' => 'Insulated',
-                'stand' => 'Yes'
-            ],
-        ];
+
+        if (session()->has('rfq_step1')) {
+            $this->products = session('rfq_step1');
+        } else {
+            $this->products = [
+                [
+                    'product_id' => '',
+                    'unit' => '',
+                    'quantity' => '',
+                    'insulation' => 'Insulated',
+                    'stand' => 'Yes'
+                ],
+            ];
+        }
     }
 
     public function addProduct()
@@ -55,13 +60,9 @@ class Step1 extends Component
     {
         $this->validate();
 
-        dd($this->products);
-
-        // Store in session
         session(['rfq_step1' => $this->products]);
 
-        // Redirect to next step
-        return redirect()->route('rfq.step2');
+        $this->redirect('/rfq/step2', navigate: true);
     }
 
 

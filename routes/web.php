@@ -48,6 +48,7 @@ Route::middleware('auth')->group(function () {
 
 
 Route::get('/rfq/step1', \App\Livewire\Rfq\Step1::class)->name('rfq.step1');
+Route::get('/rfq/step2', \App\Livewire\Rfq\Step2::class)->name('rfq.step2');
 Route::get('/counter', Counter::class);
 
 require __DIR__.'/auth.php';
