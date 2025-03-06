@@ -8,13 +8,6 @@ use Illuminate\Http\Request;
 
 class RFQController extends Controller
 {
-    public function showStep1()
-    {
-        $categories = Category::all();
-        $products = Product::all();
-        return view('rfq.step1', compact('products', 'categories'));
-    }
-
     public function processStep1(Request $request)
     {
         $request->validate([
