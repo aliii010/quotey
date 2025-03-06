@@ -68,6 +68,6 @@ class Step1 extends Component
 
     public function render()
     {
-        return view('livewire.rfq.step1');
+        return view('livewire.rfq.step1')->layout('layouts.rfq');
     }
 }
