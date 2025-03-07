@@ -1,4 +1,4 @@
-<svg {{ $attributes }} class="hover:!text-primary shrink-0 text-white" viewBox="0 0 24 24" fill="none"
+<svg {{ $attributes }} class="hover:!text-[#2c409e] shrink-0 text-primary" viewBox="0 0 24 24" fill="none"
     xmlns="http://www.w3.org/2000/svg">
     <path fill-rule="evenodd" clip-rule="evenodd" fill="currentColor"
         d="M3.25 22C3.25 21.5858 3.58579 21.25 4 21.25H20C20.4142 21.25 20.75 21.5858 20.75 22C20.75 22.4142 20.4142 22.75 20 22.75H4C3.58579 22.75 3.25 22.4142 3.25 22Z"

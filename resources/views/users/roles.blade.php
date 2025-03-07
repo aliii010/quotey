@@ -21,7 +21,7 @@
                     </div>
                     <div class="mt-6">
                         <button type="submit"
-                            class="px-4 py-2 bg-primary dark:bg-primary-dark text-white rounded-md hover:bg-primary-light dark:hover:bg-primary">
+                            class="btn btn-primary">
                             {{ __('Update Roles') }}
                         </button>
                     </div>

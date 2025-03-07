@@ -23,6 +23,11 @@
                             {{ __('Roles & Permissions') }}
                         </x-nav-link>
                     @endif
+                    @if(auth()->user()->hasPermissionTo('view_rfq'))
+                    <x-nav-link :href="route('rfq.index')" :active="request()->routeIs('rfq.index')">
+                        {{ __('Requested Quotes') }}
+                    </x-nav-link>
+                    @endif
                 </div>
             </div>
 

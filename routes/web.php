@@ -44,6 +44,8 @@ Route::middleware('auth')->group(function () {
         Route::get('/users/{userId}/roles', [UserController::class, 'showUserRoles'])->name('users.showUserRoles');
         Route::put('/users/{userId}/roles', [UserController::class, 'updateRoles'])->name('users.updateRoles');
     });
+
+    Route::get('/rfq', \App\Livewire\Rfq\Index::class)->name('rfq.index')->middleware('permission:view_rfq');
 });
 
 
