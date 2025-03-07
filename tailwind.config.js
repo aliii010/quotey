@@ -61,6 +61,9 @@ export default {
                     light: "#e0e6ed",
                     dark: "#888ea8",
                 },
+                ditana: {
+                    DEFAULT: "#00458e",
+                },
             },
             fontFamily: {
                 nunito: ["Nunito", "sans-serif"],

@@ -46,6 +46,7 @@ Route::middleware('auth')->group(function () {
     });
 
     Route::get('/rfq', \App\Livewire\Rfq\Index::class)->name('rfq.index')->middleware('permission:view_rfq');
+    Route::get('/rfq/{id}', \App\Livewire\Rfq\Detail::class)->name('rfq.detail')->middleware('permission:view_rfq');
 });
 
 

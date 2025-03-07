@@ -9,6 +9,11 @@ class Index extends Component
 {
     public $requestedQuotes;
 
+    public function goToDetail($id)
+    {
+        $this->redirect('rfq/' . $id, navigate: true);
+    }
+
     public function mount()
     {
         $this->requestedQuotes = Quote::where('status', 'requested')->get();

@@ -38,7 +38,7 @@
                                     {{ $requestedQuote->project->contact->email }}
                                 </td>
                                 <td>
-                                    <button class="btn btn-primary">View Details</button>
+                                    <button class="btn btn-primary" wire:click="goToDetail({{$requestedQuote->id}})">View Details</button>
                                 </td>
                             </tr>
                         @endforeach
