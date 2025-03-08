@@ -11,7 +11,7 @@ class Index extends Component
 
     public function goToDetail($id)
     {
-        $this->redirect('rfq/' . $id, navigate: true);
+        $this->redirect('/rfq/detail/' . $id, navigate: true);
     }
 
     public function mount()
