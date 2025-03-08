@@ -16,4 +16,9 @@ class QuoteItem extends Model
         'insulation',
         'stand',
     ];
+
+    public function product()
+    {
+        return $this->belongsTo(Product::class, 'product_id');
+    }
 }

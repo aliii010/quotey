@@ -28,4 +28,9 @@ class Quote extends Model
         return $this->belongsToMany(Product::class, 'quote_items')
             ->withPivot('unit', 'quantity', 'insulation', 'stand');
     }
+
+    public function quote_items()
+    {
+        return $this->hasMany(QuoteItem::class, 'quote_id');
+    }
 }

@@ -39,7 +39,7 @@
                         <p class="text-gray-900 font-semibold">{{ $quote->project->company->name }}</p>
                     </div>
                     <div>
-                        <label class="block text-gray-500 text-sm font-medium mb-1">Company City</label>
+                        <label class="block text-gray-500 text-sm font-medium mb-1">Company Location</label>
                         <p class="text-gray-900 font-semibold">{{ ucfirst($quote->project->company->location) }}</p>
                     </div>
                 </div>
@@ -107,5 +107,10 @@
                 </div>
             </div>
 
-            <!-- Actions Footer -->
-            <div class="mt-8 flex justify-end space-x-4">
+            <div class="flex justify-end">
+                <button class="btn btn-dark mt-4" wire:click="goToIssueQuote({{ $quote->id }})">Issue Quote</button>
+            </div>
+
+        </div>
+    </div>
+</div>
