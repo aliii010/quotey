@@ -17,23 +17,25 @@ class IssueQuote extends Component
     {
         $this->quote = Quote::findOrFail($id);
 
-        foreach ($this->quote->products as $index => $product) {
-            $this->productPrices[$index] = [
+        foreach ($this->quote->quote_items as $quote_item) {
+            $this->productPrices[$quote_item->id] = [
                 'unitPrice' => null,
                 'total' => 0
             ];
         }
     }
 
-    public function calculateTotal($index)
+    public function calculateTotal($quoteItemId)
     {
-        $product = $this->quote->products[$index];
-        $quantity = $product->pivot->quantity;
-        $unitPrice = floatval($this->productPrices[$index]['unitPrice'] ?? 0);
+        $quote_item = QuoteItem::find($quoteItemId);
+
+        $product = $quote_item->product;
+        $quantity = $quote_item->quantity;
+        $unitPrice = floatval($this->productPrices[$quoteItemId]['unitPrice'] ?? 0);
 
         $total = $quantity * $unitPrice;
 
-        $this->productPrices[$index]['total'] = round($total, 2);
+        $this->productPrices[$quoteItemId]['total'] = round($total, 2);
 
         $this->calculateGrandTotal();
     }
@@ -58,15 +60,9 @@ class IssueQuote extends Component
             'productPrices.*.unitPrice.numeric' => 'Unit price must be a number.'
         ]);
 
-        foreach ($this->quote->products as $index => $product) {
-            $quoteItem = QuoteItem::where('quote_id', $this->quote->id)
-                ->where('product_id', $product->id);
-
-            foreach ($quoteItem->get() as $quoteItem) {
-                $quoteItem->price = $this->productPrices[$index]['total'];
-                $quoteItem->save();
-            }
-
+        foreach($this->quote->quote_items as $quote_item) {
+            $quote_item->price = $this->productPrices[$quote_item->id]['total'];
+            $quote_item->save();
         }
 
         $this->quote->price = $this->grandTotal;

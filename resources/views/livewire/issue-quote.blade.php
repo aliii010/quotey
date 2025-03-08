@@ -63,20 +63,20 @@
                             </tr>
                             </thead>
                             <tbody class="bg-white divide-y divide-gray-200">
-                            @foreach($quote->products as $index => $product)
+                            @foreach($quote->quote_items as $quote_item)
                                 <tr class="hover:bg-blue-50 transition-colors duration-150">
                                     <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="font-medium text-gray-900">{{ $product->name }}</div>
+                                        <div class="font-medium text-gray-900">{{ $quote_item->product->name }}</div>
                                     </td>
                                     <td class="px-6 py-4">
                                         <div class="text-sm text-gray-600">
-                                            <div>Unit: {{ $product->pivot->unit }}</div>
-                                            <div>Insulation: {{ $product->pivot->insulation }}</div>
-                                            <div>Stand: {{ $product->pivot->stand }}</div>
+                                            <div>Unit: {{ $quote_item->unit }}</div>
+                                            <div>Insulation: {{ $quote_item->insulation }}</div>
+                                            <div>Stand: {{ $quote_item->stand }}</div>
                                         </div>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-gray-700">
-                                        {{ $product->pivot->quantity }}
+                                        {{ $quote_item->quantity }}
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <div class="relative rounded-md shadow-sm">
@@ -88,12 +88,12 @@
                                                 step="0.01"
                                                 min="0"
                                                 wire:keydown.enter.prevent
-                                                wire:model="productPrices.{{ $index }}.unitPrice"
-                                                wire:input="calculateTotal({{ $index }})"
+                                                wire:model="productPrices.{{ $quote_item->id }}.unitPrice"
+                                                wire:input="calculateTotal({{ $quote_item->id }})"
                                                 class="focus:ring-blue-500 focus:border-blue-500 block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md"
                                                 placeholder="0.00"
                                             >
-                                            @error('productPrices.' . $index . '.unitPrice')
+                                            @error('productPrices.' . $quote_item->id . '.unitPrice')
                                             <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                                             @enderror
                                         </div>
@@ -106,8 +106,8 @@
                                                 min="0"
                                                 max="100"
                                                 wire:keydown.enter.prevent
-                                                wire:model="productPrices.{{ $index }}.discount"
-                                                wire:input="calculateTotal({{ $index }})"
+                                                wire:model="productPrices.{{ $quote_item->id }}.discount"
+                                                wire:input="calculateTotal({{ $quote_item->id }})"
                                                 class="focus:ring-blue-500 focus:border-blue-500 block w-full pr-12 sm:text-sm border-gray-300 rounded-md"
                                                 placeholder="0"
                                             >
@@ -117,7 +117,7 @@
                                         </div>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap font-medium">
-                                        $<span wire:key="total-{{ $index }}">{{ number_format($productPrices[$index]['total'] ?? 0, 2) }}</span>
+                                        $<span wire:key="total-{{ $quote_item->id }}">{{ number_format($productPrices[$quote_item->id]['total'] ?? 0, 2) }}</span>
                                     </td>
                                 </tr>
                             @endforeach
